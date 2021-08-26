@@ -1,0 +1,21 @@
+.bookscard {
+	-webkit-box-shadow: -3px 3px 10px 2px rgba(0, 0, 0, 0.22);
+	-moz-box-shadow: -3px 3px 10px 2px rgba(0, 0, 0, 0.22);
+	box-shadow: -3px 3px 10px 2px rgba(0, 0, 0, 0.22);
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+.bookscard__img {
+	display: block;
+	margin: 0 auto;
+	object-fit: cover;
+	width: 128px;
+	height: 172px;
+	border: 1px solid #888787;
+}
+
+.bookscard__text {
+	font-size: 16px;
+}

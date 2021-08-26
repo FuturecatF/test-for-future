@@ -1,0 +1,27 @@
+.books {
+	margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 70px;
+}
+
+.books-items {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	justify-content: center;
+	grid-template-columns: repeat(auto-fill, 300px);
+	gap: 20px;
+}
+
+.books__btn {
+    margin: 30px auto 0;
+    border: none;
+    outline: none;
+    background-color: #dc143c;
+    color: #fff;
+    height: 50px;
+    width: 100%;
+    max-width: 100px;
+}

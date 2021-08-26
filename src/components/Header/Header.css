@@ -1,0 +1,36 @@
+.header {
+	background: url(../../images/header-bg.jpg) no-repeat 50%;
+	min-height: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.header__form {
+	margin: 0 auto;
+    min-width: 270px;
+    display: flex;
+}
+
+.header__form-input {
+
+}
+
+.header__form-btn {
+    border: none;
+    outline: none;
+    background: #dc143c;
+    color: #fff;
+    width: 100%;
+    max-width: 100px;
+    height: 30px;   
+}
+
+.header__form-btn:hover {
+    opacity: .8;  
+}
+
+.header__form-select {
+    max-height: 30px;
+    width: 100px;
+}
