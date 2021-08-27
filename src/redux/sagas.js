@@ -1,10 +1,17 @@
 import { call, put, takeEvery } from '@redux-saga/core/effects';
-import { REQUEST_SEARCH, FETCH_BOOKS, ADD_BOOKS, ADD_MOREBOOKS, GET_FULLBOOK, WRITE_FULLBOOK } from './types';
+import {
+	REQUEST_SEARCH,
+	FETCH_BOOKS,
+	ADD_BOOKS,
+	ADD_MOREBOOKS,
+	GET_FULLBOOK,
+	WRITE_FULLBOOK,
+} from './types';
 
 export function* sagaWatcher() {
 	yield takeEvery(REQUEST_SEARCH, sagaWorker);
 	yield takeEvery(ADD_BOOKS, sagaWorkerMoreBooks);
-  yield takeEvery(GET_FULLBOOK, sagaWorkerFullBook);
+	yield takeEvery(GET_FULLBOOK, sagaWorkerFullBook);
 }
 
 function* sagaWorker(searchConfig) {
@@ -32,10 +39,8 @@ function* sagaWorkerMoreBooks(searchConfig) {
 
 function* sagaWorkerFullBook(selfLink) {
 	try {
-		
 		const payload = yield call(getFullBook, selfLink);
 		yield put({ type: WRITE_FULLBOOK, payload });
-		
 	} catch (err) {
 		console.log({ message: err.message });
 	}
@@ -56,9 +61,8 @@ export async function fetchBooks(searchConfig) {
 }
 
 export async function getFullBook(data) {
-  console.log('sagaFullBook', data)
-  const { selfLink } = data;
-	
-	const response = await fetch(selfLink); 
+	const { selfLink } = data;
+
+	const response = await fetch(selfLink);
 	return await response.json();
 }

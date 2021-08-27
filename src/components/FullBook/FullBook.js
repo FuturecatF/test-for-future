@@ -2,13 +2,8 @@ import React from 'react';
 import './FullBook.css';
 
 const FullBook = ({ item }) => {
-	const { 
-        title, 
-        authors, 
-        categories, 
-        imageLinks, 
-        description 
-    } = item.volumeInfo;
+	const { title, authors, categories, imageLinks, description } =
+		item.volumeInfo;
 
 	const [isCategory, setIsCategory] = React.useState('');
 	const [isAuthor, setIsAuthor] = React.useState('');
@@ -27,7 +22,6 @@ const FullBook = ({ item }) => {
 	const imageSmall = imageLinks.small;
 	const imageLarge = imageLinks.large;
 
-	console.log(item);
 	return (
 		<li className='fullbook'>
 			<div className='fullbook__container-img'>

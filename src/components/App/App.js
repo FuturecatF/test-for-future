@@ -23,13 +23,14 @@ function App() {
 	const history = useHistory();
 	const [isBooksArray, setIsBooksArray] = React.useState([]);
 
-const { searchWord, sorting, category } = useSelector((state) => state.search);
-const index = useSelector((state) => state.search.startIndex);
-	
+	const { searchWord, sorting, category } = useSelector(
+		(state) => state.search
+	);
+	const index = useSelector((state) => state.search.startIndex);
+
 	const books = useSelector((state) => state.cards.fetchedCards.items);
 
 	const { fullbook, showFullBook } = useSelector((state) => state.fullbook);
-//	const showFullBook = useSelector((state) => state.fullbook.showFullBook);
 
 	/* Кнопка MORE добавляет больше книг */
 	function handleClickMoreBooks() {
@@ -56,7 +57,7 @@ const index = useSelector((state) => state.search.startIndex);
 		const startIndex = 0;
 
 		const searchConfig = { searchWord, startIndex, sorting, category };
-		console.log('App Submit', searchConfig);
+
 		dispatch(requestSearch(searchConfig));
 		dispatch(addSearchConfig(searchConfig));
 

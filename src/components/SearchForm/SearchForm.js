@@ -7,14 +7,11 @@ const SearchForm = ({ onSearch }) => {
 	const {
 		reset,
 		register,
-		//formState: { errors },
 		handleSubmit,
 	} = form;
 	const { isValid } = form.formState;
 	const onSubmit = (data) => {
-		// setValidation(false);
 		
-			console.log(data);
 		
 
 		 onSearch(data);
@@ -24,10 +21,12 @@ const SearchForm = ({ onSearch }) => {
 	return (
 		<form className='searchform' onSubmit={handleSubmit(onSubmit)} noValidate>
             <fieldset className="searchform__fieldset">
+				
 			<input
 				className='searchform__input'
 				name='input'
                 placeholder="Название книги"
+				type="text"
 				{...register('search', { required: true, })}
 			></input>
 
@@ -35,19 +34,20 @@ const SearchForm = ({ onSearch }) => {
 				Поиск
 			</button>
             </fieldset>
-            <fieldset className="searchform__fieldset">
+            <fieldset className="searchform__fieldset searchform__fieldset_select-resize">
+			<label className="searchform__label-select" htmlFor="sorting" >Sorting by: </label>
 			<select
 				className='searchform__select'
-				name='relevance'
+				id='sorting'
 				{...register('sorting')}
 			>
 				<option value='relevance'>relevance</option>
 				<option value='newest'>newest</option>
 			</select>
-
+			<label className="searchform__label-select" htmlFor="category">Category: </label>
 			<select
 				className='searchform__select'
-				name='category'
+				id='category'
 				{...register('category')}
 			>
 				<option value=''>all</option>

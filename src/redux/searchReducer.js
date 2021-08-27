@@ -10,8 +10,6 @@ const initialState = {
 export const searchReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_SEARCCONFIG:
-			 console.log('ADD_SEARCCONFIG', action.payload);
-
 			return {
 				...state,
 				searchWord: action.payload.searchWord,
@@ -20,8 +18,6 @@ export const searchReducer = (state = initialState, action) => {
 				category: action.payload.category,
 			};
 		case SEARCCONFIG_UPDATE:
-			 console.log('SEARCCONFIG_UPDATE', action.payload);
-
 			return {
 				...state,
 				searchWord: action.payload.search,

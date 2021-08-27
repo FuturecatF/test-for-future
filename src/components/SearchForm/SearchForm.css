@@ -30,16 +30,24 @@
 	width: 100%;
 	max-width: 100px;
 	height: 30px;
+	cursor: pointer;
 }
 
 .searchform__btn:hover {
 	opacity: 0.8;
 }
 
+.searchform__label-select {
+	color: #fff;
+	text-shadow: 0px 1px 14px rgba(0,0,0,1.0);	
+}
+
 .searchform__select {
 	height: 25px;
 	width: 100px;
 }
+
+
 
 @media screen and (max-width: 530px) {
 	.searchform__fieldset {
@@ -48,6 +56,17 @@
 
 	.searchform {
 		padding: 10px;
+	}
+	.searchform__fieldset_select-resize {
+		flex-direction: column;
+		align-items: center;
+	}
+	.searchform__label-select {
+		margin: 5px 0;
+			
+	}
+	.searchform__select {
+		width: 150px;
 	}
 }
 
