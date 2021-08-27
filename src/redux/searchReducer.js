@@ -1,15 +1,34 @@
-import { ADD_SEARCHWORD } from './types';
+import { ADD_SEARCCONFIG, SEARCCONFIG_UPDATE } from './types';
 
 const initialState = {
 	searchWord: '',
-    startIndex: 0
+	startIndex: 0,
+	sorting: '',
+	category: '',
 };
 
 export const searchReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case ADD_SEARCHWORD:
-            console.log(action.payload)
-			return { ...state, searchWord: action.payload, startIndex: state.startIndex +=10 };
+		case ADD_SEARCCONFIG:
+			 console.log('ADD_SEARCCONFIG', action.payload);
+
+			return {
+				...state,
+				searchWord: action.payload.searchWord,
+				startIndex: action.payload.startIndex,
+				sorting: action.payload.sorting,
+				category: action.payload.category,
+			};
+		case SEARCCONFIG_UPDATE:
+			 console.log('SEARCCONFIG_UPDATE', action.payload);
+
+			return {
+				...state,
+				searchWord: action.payload.search,
+				startIndex: (state.startIndex += 10),
+				sorting: action.payload.sorting,
+				category: action.payload.category,
+			};
 
 		default:
 			return state;

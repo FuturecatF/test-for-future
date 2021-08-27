@@ -2,16 +2,27 @@ import { FETCH_BOOKS, ADD_MOREBOOKS } from './types';
 
 const initialState = {
 	fetchedCards: [],
-	startIndex: 10,
-	searchWord: '',
+	isLoadMore: true,
 };
 
 export const cardsReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case FETCH_BOOKS:
-			// console.log(action.payload)
+			//	console.log(action.payload);
 
-			// console.log(action.payload.items)
+			if (action.payload.items.length < 10) {
+				state.isLoadMore = false;
+			}
+
+			console.log('FETCH_BOOKS', action.payload.items);
+
+			// const array = action.payload.items.filter((item) => item.id !== item.id)
+			const array = [
+				...new Map(
+					action.payload.items.map((item) => [item.id, item])
+				).values(),
+			];
+
 			/*  const booksArray = action.payload.items.map((item) => {
 				return {
 				  ...item,
@@ -20,11 +31,29 @@ export const cardsReducer = (state = initialState, action) => {
 				};
 			  });  */
 
-			return { ...state, fetchedCards: action.payload };
+			return {
+				...state,
+				fetchedCards: {
+					items: array,
+					kind: action.payload.kind,
+					totalItems: action.payload.totalItems,
+				},
+			};
 
 		case ADD_MOREBOOKS:
-			//console.log(action)
-			const newArray = state.fetchedCards.items.concat(action.payload.items);
+			// console.log(action.payload.items.length)
+			if (action.payload.items.length < 10) {
+				state.isLoadMore = false;
+			}
+			/* if (action.payload.items.length < 10) {
+				state.isLoadMore = false;
+			} */
+			const concatArray = state.fetchedCards.items.concat(action.payload.items);
+			const newArray = [
+				...new Map(
+					concatArray.map((item) => [item.id, item])
+				).values(),
+			];
 			// console.log(state.fetchedCards)
 			return {
 				...state,
@@ -33,8 +62,7 @@ export const cardsReducer = (state = initialState, action) => {
 					kind: action.payload.kind,
 					totalItems: action.payload.totalItems,
 				},
-				startIndex: (state.startIndex += 10),
-				searchWord: state.searchWord,
+				//isLoadMore: getActualLoadStatus(action.payload.items.length)
 			};
 
 		default:
