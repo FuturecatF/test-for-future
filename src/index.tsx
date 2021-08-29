@@ -5,7 +5,7 @@ import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import { /* HashRouter, */ BrowserRouter } from 'react-router-dom' // HashRouter для gh-pages
+import { /* HashRouter,  */BrowserRouter } from 'react-router-dom' // HashRouter для gh-pages
 
 ReactDOM.render(
 	<React.StrictMode>
