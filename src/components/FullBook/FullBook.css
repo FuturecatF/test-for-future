@@ -1,7 +1,8 @@
 .fullbook {
-	display: flex;
-	column-gap: 20px;
-	padding: 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 70px;
+	padding: 30px;
 }
 
 .fullbook__container-img {
@@ -50,7 +51,7 @@
 
 @media screen and (max-width: 730px) {
 	.fullbook {
-		flex-direction: column;
+		grid-template-columns: 1fr;
 		padding: 10px;
 	}
 	.fullbook__container-img {

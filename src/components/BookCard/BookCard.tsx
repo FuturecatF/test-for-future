@@ -1,33 +1,36 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './BookCard.css';
 import { getFullBook } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
-import {
-	useHistory,
-} from 'react-router-dom';
-const BookCard = ({ item }) => {
+import { useHistory } from 'react-router-dom';
+
+import { DEFAULTIMAGE } from '../../utils/config';
+
+interface BookCardProps {
+	item: any;
+}
+
+const BookCard: FC<BookCardProps> = ({ item }) => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { categories, title, authors } = item.volumeInfo;
 
-	const defaultImage =
-		'https://images.unsplash.com/photo-1599508704512-2f19efd1e35f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80';
-	const { thumbnail } = item.volumeInfo.imageLinks || defaultImage;
-	const [isCategory, setIsCategory] = React.useState('');
-	const [isAuthor, setIsAuthor] = React.useState('');
+	const { thumbnail } = item.volumeInfo.imageLinks || DEFAULTIMAGE;
+	const [isCategory, setIsCategory] = React.useState<string>('');
+	const [isAuthor, setIsAuthor] = React.useState<string>('');
 
 	React.useEffect(() => {
 		if (categories) {
-			const category = categories.join(', ');
+			const category: string = categories.join(', ');
 			setIsCategory(category);
 		}
 		if (authors) {
-			const author = authors.join(', ');
+			const author: string = authors.join(', ');
 			setIsAuthor(author);
 		}
 	}, [categories, authors]);
 
-	function handleClickBook() {
+	function handleClickBook(): void {
 		dispatch(getFullBook(item.selfLink))
 		history.push('/book');
 	}
@@ -39,9 +42,9 @@ const BookCard = ({ item }) => {
 				src={
 					thumbnail
 						? thumbnail
-						: defaultImage 
+						: DEFAULTIMAGE
 				}
-				alt='#'
+				alt={title}
 			></img>
 			<div className='bookscard__footer'>
 				{isCategory && (

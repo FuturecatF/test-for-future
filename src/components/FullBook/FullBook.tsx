@@ -1,26 +1,44 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './FullBook.css';
 
-const FullBook = ({ item }) => {
-	const { title, authors, categories, imageLinks, description } =
-		item.volumeInfo;
+interface FullBookProps {
+	item: any;
+}
 
-	const [isCategory, setIsCategory] = React.useState('');
-	const [isAuthor, setIsAuthor] = React.useState('');
+const FullBook: FC<FullBookProps> = ({ item }) => {
+
+	interface itemTypes {
+		title: string;
+		authors: any[];
+		categories: any[];
+		imageLinks: any;
+		description: string;
+	}
+
+	const { 
+		title, 
+		authors, 
+		categories, 
+		imageLinks, 
+		description 
+	}: itemTypes = item.volumeInfo;
+
+	const [isCategory, setIsCategory] = React.useState<string>('');
+	const [isAuthor, setIsAuthor] = React.useState<string>('');
 
 	React.useEffect(() => {
 		if (categories) {
-			const category = categories.join(' / ');
+			const category: string = categories.join(' / ');
 			setIsCategory(category);
 		}
 		if (authors) {
-			const author = authors.join(', ');
+			const author: string = authors.join(', ');
 			setIsAuthor(author);
 		}
 	}, [categories, authors]);
 
-	const imageSmall = imageLinks.small;
-	const imageLarge = imageLinks.large;
+	const imageSmall: string = imageLinks.small;
+	const imageLarge: string = imageLinks.large;
 
 	return (
 		<li className='fullbook'>

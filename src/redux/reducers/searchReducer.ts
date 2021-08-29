@@ -1,4 +1,17 @@
-import { ADD_SEARCCONFIG, SEARCCONFIG_UPDATE } from './types';
+import { ADD_SEARCCONFIG, SEARCCONFIG_UPDATE } from '../types';
+
+interface SearchState {
+	searchWord: string,
+	startIndex: number,
+	sorting: string,
+	category: string,
+}
+
+interface SearchAction {
+	type: string;
+	payload?: any;
+}
+
 
 const initialState = {
 	searchWord: '',
@@ -7,7 +20,7 @@ const initialState = {
 	category: '',
 };
 
-export const searchReducer = (state = initialState, action) => {
+export const searchReducer = (state = initialState, action: SearchAction): SearchState => {
 	switch (action.type) {
 		case ADD_SEARCCONFIG:
 			return {

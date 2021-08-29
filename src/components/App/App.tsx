@@ -21,24 +21,41 @@ import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
 function App() {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const [isBooksArray, setIsBooksArray] = React.useState([]);
+	const [isBooksArray, setIsBooksArray] = React.useState<any[]>([]);
+
+	interface RootState {
+		search: any;
+		cards: any;
+		fullbook: any;
+	}
 
 	const { searchWord, sorting, category } = useSelector(
-		(state) => state.search
-	);
-	const index = useSelector((state) => state.search.startIndex);
+		(state: RootState) => state.search);
 
-	const books = useSelector((state) => state.cards.fetchedCards.items);
+	const index = useSelector((state: RootState) => state.search.startIndex);
 
-	const { fullbook, showFullBook } = useSelector((state) => state.fullbook);
+	const books = useSelector((state: RootState) => state.cards.fetchedCards.items);
+
+
+	const { isLoading, isLoadMore, error } = useSelector((state: RootState) => state.cards);
+
+	const { fullbook, showFullBook } = useSelector((state: RootState) => state.fullbook);
 
 	/* Кнопка MORE добавляет больше книг */
-	function handleClickMoreBooks() {
-		console.log('searchWord', searchWord);
+	function handleClickMoreBooks(): void {
+
 
 		if (books.length) {
-			const startIndex = index + 10;
-			const searchConfig = {
+			const startIndex: number = index + 10;
+
+			interface searchConfigTypes {
+				search: string;
+				startIndex: number;
+				sorting: string;
+				category: string;
+			}
+
+			const searchConfig: searchConfigTypes = {
 				search: searchWord,
 				startIndex: startIndex,
 				sorting: sorting,
@@ -50,17 +67,28 @@ function App() {
 	}
 
 	/* Поиск книг */
-	function handleSearchSubmit(searchString) {
-		const searchWord = searchString.search;
-		const sorting = searchString.sorting;
-		const category = searchString.category;
-		const startIndex = 0;
+	interface dataTypes {
+		search: string;
+		sorting: string;
+		category: string;
+	}
 
-		const searchConfig = { searchWord, startIndex, sorting, category };
+	function handleSearchSubmit(searchString: dataTypes) {
+		const searchWord: string = searchString.search;
+		const sorting: string = searchString.sorting;
+		const category: string = searchString.category;
+		const startIndex: number = 0;
+
+		interface searchConfigTypes {
+			searchWord: string;
+			startIndex: number;
+			sorting: string;
+			category: string;
+		}
+		const searchConfig: searchConfigTypes = { searchWord, startIndex, sorting, category };
 
 		dispatch(requestSearch(searchConfig));
 		dispatch(addSearchConfig(searchConfig));
-
 		setIsBooksArray([]);
 		history.push('/');
 	}
@@ -68,15 +96,15 @@ function App() {
 	/* Вывод только конкретной категории или всех сразу */
 	React.useEffect(() => {
 		if (books) {
-			const itemExist = books.filter((item) => {
+			const itemExist: Array<any[]> = books.filter((item: any) => {
 				if (item.volumeInfo.categories && category) {
 					return typeof item === 'object';
 				}
 				return null;
 			});
 
-			const array = itemExist.filter((item) => {
-				function upFirst(str) {
+			const array: Array<any[]> = itemExist.filter((item: any) => {
+				function upFirst(str: any) {
 					if (!str) return str;
 
 					return str[0].toUpperCase() + str.slice(1);
@@ -97,7 +125,13 @@ function App() {
 				<Header onSearch={handleSearchSubmit} />
 				<Switch>
 					<Route exact path='/'>
-						<Books books={isBooksArray} onClickMore={handleClickMoreBooks} />
+						<Books
+							books={isBooksArray}
+							onClickMore={handleClickMoreBooks}
+							isLoading={isLoading}
+							isLoadMore={isLoadMore}
+							error={error}
+						/>
 					</Route>
 					<Route exact path='/book'>
 						<BookPage fullbook={fullbook} />
