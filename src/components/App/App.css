@@ -1,12 +1,7 @@
-.page {
-	display: flex;
-	flex-direction: column;
-}
-
 .page__container {
 	margin: 0 auto;
 	min-width: 270px;
-	width: 100%;
+	/* max-width: 1920px; */
 	min-height: 100vh;
 	font-family: 'Helvetica Neue', Arial, sans-serif;
 	text-rendering: optimizeLegibility;
